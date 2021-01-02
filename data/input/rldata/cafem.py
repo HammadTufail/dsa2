@@ -40,14 +40,14 @@ class Tasks():
     def __init__(self,datasetids,buffer_size=100):
         self.datasets = {}
         self.tasks = []
-        if os.path.isfile('../data/log.csv'):
-            log = pd.read_csv('../data/log.csv',header=None)
+        if os.path.isfile('data/log.csv'):
+            log = pd.read_csv('data/log.csv',header=None)
             for val in log.values:
                 self.tasks.append([val[0],val[1],Buffer(buffer_size)])
         else:
-            f = open('../data/log.csv','a')
+            f = open('data/log.csv','a')
             for did in tqdm(datasetids):
-                f_dataset = "../data/%d/%d.arff" % (did, did)
+                f_dataset = "data/%d/%d.arff" % (did, did)
                 dataset, meta,tasktype = load(f_path=f_dataset)
                 self.datasets[did] = (dataset,meta)
                 for i,v in enumerate(meta[:-1]):
@@ -64,7 +64,7 @@ def generate_trajectories(task):
     #env = envfunc(task[0],feature=task[1])
     #print('loading')
     
-    f_dataset = "../data/%d/%d.arff" % (task[0], task[0])
+    f_dataset = "data/%d/%d.arff" % (task[0], task[0])
     weights = task[2]
     dataset, meta,tasktype = load(f_path=f_dataset) 
     #print('loaded')
